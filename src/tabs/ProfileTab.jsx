@@ -1,16 +1,23 @@
-import { THEME } from '../constants.js';
+import { useMemo } from 'react';
+import { THEME, BIO_MSGS } from '../constants.js';
 import { calculateStats, calculateCurrentStreak } from '../utils/helpers.js';
 
 export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
   const stats = calculateStats(dayLog);
   const currentStreak = calculateCurrentStreak(dayLog);
 
+  // Pega uma bio aleatória toda vez que o componente é montado
+  const randomBio = useMemo(() => {
+    const randomIndex = Math.floor(Math.random() * BIO_MSGS.length);
+    return BIO_MSGS[randomIndex];
+  }, []);
+
   return (
     <div>
       <div style={{ marginBottom: THEME.spacing.xl }}>
         <div style={{ fontSize: THEME.typography.fontSize }}>
-          <span style={{ color: THEME.colors.primary }}>user[pro]</span>
-          <span style={{ color: THEME.colors.success }}>@init.Habits</span>
+          <span style={{ color: THEME.colors.primary }}>TuTz</span>
+          <span style={{ color: THEME.colors.success }}>@TrackerDay</span>
           <span style={{ color: THEME.colors.textSecondary }}> $ profile</span>
         </div>
       </div>
@@ -26,9 +33,11 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
         }}
       >
         <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.text, marginBottom: THEME.spacing.sm }}>
-          user[pro]
+          Richardt Justke (TuTz)
         </div>
-        <div style={{ color: THEME.colors.textTertiary, fontSize: 13 }}>// tracking desde o início</div>
+        <div style={{ color: THEME.colors.textTertiary, fontSize: 13 }}>
+          {randomBio}
+        </div>
         <div
           style={{
             marginTop: THEME.spacing.xl,
@@ -38,9 +47,9 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
           }}
         >
           {[
-            { label: 'total days', value: stats.totalDays, icon: '📅' },
-            { label: 'avg %', value: stats.avgPct + '%', icon: '📊' },
-            { label: 'streak', value: currentStreak, icon: '🔥' },
+            { label: 'dias totais', value: stats.totalDays, icon: '📅' },
+            { label: 'média %', value: stats.avgPct + '%', icon: '📈' },
+            { label: 'sequência', value: currentStreak, icon: '🔥' },
           ].map((s) => (
             <div
               key={s.label}
@@ -64,7 +73,7 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
         </div>
       </div>
 
-      {/* config */}
+      {/* configurações */}
       <div
         style={{
           padding: THEME.spacing.xl,
@@ -75,7 +84,7 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
         }}
       >
         <div style={{ color: THEME.colors.text, fontWeight: 700, marginBottom: THEME.spacing.md }}>
-          ⚙️ config
+          ⚙️ configurações
         </div>
         <button
           onClick={() => {
@@ -96,7 +105,7 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
             marginBottom: THEME.spacing.md,
           }}
         >
-          reset all data
+          resetar todos os dados
         </button>
       </div>
 

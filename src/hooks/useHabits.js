@@ -83,11 +83,11 @@ export function useHabits() {
 
     const id = 't' + Date.now();
     const groupLabel = {
-      morning: 'Morning',
-      deepwork: 'Deep Work',
+      morning: 'Manhã',
+      deepwork: 'Trabalho Profundo',
       health: 'Saúde',
-      evening: 'Wind Down',
-      learning: 'Learning',
+      evening: 'Descompressão',
+      learning: 'Aprendizado',
     }[group] || group;
 
     const groupIcon = {

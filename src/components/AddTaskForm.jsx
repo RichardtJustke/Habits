@@ -140,7 +140,7 @@ export default function AddTaskForm({ onAdd, onCancel }) {
             fontSize: 13,
           }}
         >
-          [save]
+          [salvar]
         </button>
         <button
           onClick={onCancel}
@@ -155,7 +155,7 @@ export default function AddTaskForm({ onAdd, onCancel }) {
             fontSize: 13,
           }}
         >
-          [cancel]
+          [cancelar]
         </button>
       </div>
     </div>

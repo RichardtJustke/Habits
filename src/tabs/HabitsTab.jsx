@@ -85,7 +85,7 @@ export default function HabitsTab({
         />
       ))}
 
-      {/* add task */}
+      {/* adicionar tarefa */}
       {showAddForm ? (
         <AddTaskForm onAdd={onAddTask} onCancel={() => setShowAddForm(false)} />
       ) : (

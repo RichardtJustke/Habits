@@ -10,10 +10,12 @@ export const THEME = {
     textSecondary: '#a0a0a0',
     textTertiary: '#666666',
     textMuted: '#333333',
-    primary: '#ffcc00',
-    success: '#00ff00',
-    danger: '#ff0000',
-    warning: '#ff8800',
+    primary: '#00ff88',      // Neon green
+    success: '#00ffff',      // Cyan
+    danger: '#ff0055',       // Hot pink
+    warning: '#ffaa00',      // Orange
+    accent: '#aa00ff',       // Magenta
+    info: '#00aaff',         // Light blue
   },
   typography: {
     fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
@@ -38,26 +40,38 @@ export const THEME = {
   },
 };
 
+// ── BIO STATUS MESSAGES ──────────────────────────────────────────────────────────
+export const BIO_MSGS = [
+  "// focado na evolução constante",
+  "// building the future, one habit at a time",
+  "// consistência vence a intensidade",
+  "// codando a própria vida",
+  "// 1% melhor todos os dias",
+  "// debugando processos diários",
+  "// não conte os dias, faça os dias contarem",
+  "// transformando rotina em algoritmo"
+];
+
 // ── ROTATING MESSAGES ──────────────────────────────────────────────────────────
 export const ROTATING_MSGS = [
-  "task list loaded. enthusiasm not included.",
-  "git commit -m 'got things done'",
-  "initializing productivity daemon...",
-  "// TODO: change the world",
-  "no tests failing. yet.",
-  "pushing to main. no regrets.",
-  "rm -rf procrastination",
-  "merge conflict: brain vs to-do list",
+  "lista de tarefas carregada. entusiasmo não incluído.",
+  "git commit -m 'coisa feita'",
+  "inicializando daemon de produtividade...",
+  "// TODO: mudar o mundo",
+  "sem testes falhando. ainda.",
+  "empurrando para main. sem arrependimentos.",
+  "rm -rf procrastinação",
+  "conflito de merge: cérebro vs lista de tarefas",
 ];
 
 // ── HABIT GROUPS ───────────────────────────────────────────────────────────────
 export const GROUPS = {
   morning: {
-    label: 'Morning',
+    label: 'Manhã',
     icon: '🌅',
   },
   deepwork: {
-    label: 'Deep Work',
+    label: 'Trabalho Profundo',
     icon: '💻',
   },
   health: {
@@ -65,11 +79,11 @@ export const GROUPS = {
     icon: '💪',
   },
   evening: {
-    label: 'Wind Down',
+    label: 'Descompressão',
     icon: '🌙',
   },
   learning: {
-    label: 'Learning',
+    label: 'Aprendizado',
     icon: '📚',
   },
 };

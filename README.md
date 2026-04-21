@@ -1,15 +1,19 @@
-# Habits Tracker
+# TrackerDay
 
-```
- _   _       _     _ _       _______ 
-| | | |     | |   (_) |     |__   __|
-| |_| | __ _| |__  _| |_ ___   | |   
-|  _  |/ _` | '_ \| | __/ __|  | |   
-| | | | (_| | |_) | | |_\__ \  | |   
-|_| |_|\__,_|_.__/|_|\__|___/  |_|   
+```text
+  _____               _             _____             
+ |_   _|             | |           |  __ \            
+   | | _ __ __ _  ___| | _____ _ __| |  | |__ _ _   _ 
+   | || '__/ _` |/ __| |/ / _ \ '__| |  | / _` | | | |
+   | || | | (_| | (__|   <  __/ |  | |__| \__, | |_| |
+   \_/|_|  \__,_|\___|_|\_\___|_|  |_____/ \__,_|\__, |
+                                                  __/ |
+                                                 |___/ 
 ```
 
-**Daily habit tracker** com interface terminal-like, persistência em localStorage e heatmap de contribuições.
+**TrackerDay** (anteriormente Habits Tracker) começou como uma releitura minimalista de projeto, focada em construir uma interface _terminal-like_ para rastreamento diário de hábitos utilizando Vite + React 18, persistência local e um design agressivamente verde-neon/magenta num fundo preto.
+
+Quem sabe esse experimento inicial não seja a semente para uma aplicação mais robusta no futuro? Por enquanto, é apenas você, seus hábitos e o terminal.
 
 ## 🚀 Stack
 

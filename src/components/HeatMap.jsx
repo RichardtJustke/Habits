@@ -21,7 +21,7 @@ export default function HeatMap({ heatmap, stats }) {
     >
       <div style={{ display: 'flex', gap: THEME.spacing.md, marginBottom: THEME.spacing.sm }}>
         <span>📅</span>
-        <span style={{ color: THEME.colors.text, fontWeight: 700 }}>contributions</span>
+        <span style={{ color: THEME.colors.text, fontWeight: 700 }}>contribuições</span>
       </div>
       <div
         style={{
@@ -35,7 +35,7 @@ export default function HeatMap({ heatmap, stats }) {
 
       <div style={{ overflowX: 'auto' }}>
         <svg width={svgW + 20} height={svgH + 4} style={{ display: 'block' }}>
-          {/* month labels */}
+          {/* rótulos de mês */}
           {monthLabels.map(({ wi, label }) => (
             <text
               key={wi}
@@ -71,7 +71,7 @@ export default function HeatMap({ heatmap, stats }) {
         </svg>
       </div>
 
-      {/* legend */}
+      {/* legenda */}
       <div
         style={{
           display: 'flex',

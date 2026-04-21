@@ -11,8 +11,10 @@ export default function ProgressBar({ pct, todayDone, totalTasks }) {
         marginBottom: THEME.spacing.xxxl,
         padding: `${THEME.spacing.lg}px ${THEME.spacing.xl}px`,
         background: THEME.colors.bgSecondary,
-        borderRadius: THEME.radius.lg,
+        borderLeft: `3px solid ${barColor}`,
+        borderRadius: THEME.radius.md,
         border: `1px solid ${THEME.colors.border}`,
+        borderLeftWidth: '3px',
       }}
     >
       <div

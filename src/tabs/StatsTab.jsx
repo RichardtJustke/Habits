@@ -12,13 +12,13 @@ export default function StatsTab({ rotatingMsg, tasks, dayLog }) {
     <div>
       <div style={{ marginBottom: THEME.spacing.xl }}>
         <div style={{ fontSize: THEME.typography.fontSize }}>
-          <span style={{ color: THEME.colors.primary }}>user[pro]</span>
-          <span style={{ color: THEME.colors.success }}>@init.Habits</span>
+          <span style={{ color: THEME.colors.primary }}>TuTz</span>
+          <span style={{ color: THEME.colors.success }}>@TrackerDay</span>
           <span style={{ color: THEME.colors.textSecondary }}> $ stats</span>
         </div>
       </div>
 
-      {/* quick glance */}
+      {/* visão rápida */}
       <div
         style={{
           marginBottom: THEME.spacing.xxxl,
@@ -30,7 +30,7 @@ export default function StatsTab({ rotatingMsg, tasks, dayLog }) {
       >
         <div style={{ display: 'flex', gap: THEME.spacing.md, marginBottom: THEME.spacing.md }}>
           <span>👁️</span>
-          <span style={{ color: THEME.colors.text, fontWeight: 700 }}>quick glance</span>
+          <span style={{ color: THEME.colors.text, fontWeight: 700 }}>visão rápida</span>
         </div>
         <div
           style={{
@@ -43,16 +43,16 @@ export default function StatsTab({ rotatingMsg, tasks, dayLog }) {
         </div>
         <div style={{ color: THEME.colors.textSecondary, lineHeight: 2, fontSize: 13 }}>
           <div>
-            days tracked: <span style={{ color: THEME.colors.primary }}>{stats.totalDays}</span>
+            dias rastreados: <span style={{ color: THEME.colors.primary }}>{stats.totalDays}</span>
           </div>
           <div>
-            avg completion: <span style={{ color: THEME.colors.primary }}>{stats.avgPct}%</span>
+            conclusão média: <span style={{ color: THEME.colors.primary }}>{stats.avgPct}%</span>
           </div>
           <div>
-            perfect days: <span style={{ color: THEME.colors.primary }}>{stats.perfectDays}</span>
+            dias perfeitos: <span style={{ color: THEME.colors.primary }}>{stats.perfectDays}</span>
           </div>
           <div>
-            current streak:{' '}
+            sequência atual:{' '}}
             <span style={{ color: currentStreak > 0 ? THEME.colors.primary : THEME.colors.textTertiary }}>
               {currentStreak} days
             </span>
@@ -63,7 +63,7 @@ export default function StatsTab({ rotatingMsg, tasks, dayLog }) {
       {/* heatmap */}
       <HeatMap heatmap={heatmap} stats={stats} />
 
-      {/* per-task streaks */}
+      {/* sequências por tarefa */}
       <div
         style={{
           padding: THEME.spacing.xl,
@@ -74,7 +74,7 @@ export default function StatsTab({ rotatingMsg, tasks, dayLog }) {
       >
         <div style={{ display: 'flex', gap: THEME.spacing.md, marginBottom: THEME.spacing.sm }}>
           <span>🔥</span>
-          <span style={{ color: THEME.colors.text, fontWeight: 700 }}>streaks por tarefa</span>
+          <span style={{ color: THEME.colors.text, fontWeight: 700 }}>sequências por tarefa</span>
         </div>
         <div
           style={{
