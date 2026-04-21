@@ -10,7 +10,7 @@ export default function TaskItem({ task, isChecked, onToggle, onDelete }) {
         marginBottom: THEME.spacing.lg,
         padding: `${THEME.spacing.md}px ${THEME.spacing.md + 2}px`,
         borderRadius: THEME.radius.md,
-        background: isChecked ? '#111820' : 'transparent',
+        background: isChecked ? '#0a0a0a' : 'transparent',
         transition: 'background 0.2s',
         cursor: 'pointer',
         position: 'relative',

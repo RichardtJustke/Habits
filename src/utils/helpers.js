@@ -54,12 +54,12 @@ export function buildProgressBar(pct, length = 30) {
 
 // ── HEAT COLOR MAPPING ────────────────────────────────────────────────────────
 export function heatColor(pct) {
-  if (pct === null) return '#1a1d2e';
-  if (pct === 0) return '#1a1d2e';
-  if (pct < 0.25) return '#1e3a1e';
-  if (pct < 0.5) return '#2d6a2d';
-  if (pct < 0.75) return '#3d9e3d';
-  return '#4ade80';
+  if (pct === null) return '#0a0a0a';
+  if (pct === 0) return '#0a0a0a';
+  if (pct < 0.25) return '#1a3a1a';
+  if (pct < 0.5) return '#2d5a2d';
+  if (pct < 0.75) return '#3d8e3d';
+  return '#00ff00';
 }
 
 // ── STREAK CALCULATION ────────────────────────────────────────────────────────

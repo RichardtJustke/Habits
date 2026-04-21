@@ -9,7 +9,7 @@ export default function FlashMessage({ message }) {
         position: 'fixed',
         top: THEME.spacing.xl,
         right: THEME.spacing.max,
-        background: '#1a2a1a',
+        background: '#000000',
         border: `1px solid ${THEME.colors.success}`,
         color: THEME.colors.success,
         padding: `${THEME.spacing.md}px ${THEME.spacing.xl}px`,
