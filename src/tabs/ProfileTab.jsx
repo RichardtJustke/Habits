@@ -1,10 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { THEME, BIO_MSGS } from '../constants.js';
 import { calculateStats, calculateCurrentStreak } from '../utils/helpers.js';
 
-export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
+export default function ProfileTab({ tasks, dayLog, completions, onResetAll, onImportState }) {
   const stats = calculateStats(dayLog);
   const currentStreak = calculateCurrentStreak(dayLog);
+  const fileInputRef = useRef(null);
+  const [backupMessage, setBackupMessage] = useState('');
 
   // Pega uma bio aleatória toda vez que o componente é montado
   const randomBio = useMemo(() => {
@@ -86,6 +88,9 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
         <div style={{ color: THEME.colors.text, fontWeight: 700, marginBottom: THEME.spacing.md }}>
           ⚙️ configurações
         </div>
+        <div style={{ color: THEME.colors.textTertiary, fontSize: THEME.typography.fontSizeSmall, marginBottom: THEME.spacing.md }}>
+          Os dados ficam salvos automaticamente no navegador via localStorage. Para não perder nada, exporte um backup JSON e, se precisar, restaure depois.
+        </div>
         <button
           onClick={() => {
             if (window.confirm('Resetar tudo?')) {
@@ -107,6 +112,86 @@ export default function ProfileTab({ tasks, dayLog, completions, onResetAll }) {
         >
           resetar todos os dados
         </button>
+
+        <button
+          onClick={() => {
+            const backup = {
+              tasks,
+              dayLog,
+              completions,
+              exportedAt: new Date().toISOString(),
+            };
+
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `trackerday-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            setBackupMessage('backup exportado');
+            setTimeout(() => setBackupMessage(''), 1400);
+          }}
+          style={{
+            display: 'block',
+            background: 'none',
+            border: `1px solid ${THEME.colors.border}`,
+            color: THEME.colors.success,
+            fontFamily: THEME.typography.fontFamily,
+            fontSize: 13,
+            padding: `${THEME.spacing.md}px ${THEME.spacing.xl}px`,
+            borderRadius: THEME.radius.md,
+            cursor: 'pointer',
+            marginBottom: THEME.spacing.md,
+          }}
+        >
+          exportar backup JSON
+        </button>
+
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          style={{
+            display: 'block',
+            background: 'none',
+            border: `1px solid ${THEME.colors.border}`,
+            color: THEME.colors.primary,
+            fontFamily: THEME.typography.fontFamily,
+            fontSize: 13,
+            padding: `${THEME.spacing.md}px ${THEME.spacing.xl}px`,
+            borderRadius: THEME.radius.md,
+            cursor: 'pointer',
+            marginBottom: THEME.spacing.md,
+          }}
+        >
+          importar backup JSON
+        </button>
+
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json"
+          style={{ display: 'none' }}
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            const text = await file.text();
+            const parsed = JSON.parse(text);
+            if (!parsed || !Array.isArray(parsed.tasks)) {
+              alert('Backup inválido.');
+              return;
+            }
+
+            onImportState(parsed);
+            e.target.value = '';
+          }}
+        />
+
+        {backupMessage && (
+          <div style={{ color: THEME.colors.success, fontSize: THEME.typography.fontSizeSmall, marginTop: THEME.spacing.sm }}>
+            {backupMessage}
+          </div>
+        )}
       </div>
 
       {/* task list */}

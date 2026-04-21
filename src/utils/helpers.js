@@ -14,6 +14,13 @@ export const fmt = (d) => {
 export const weekLabel = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
 export const shortWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
+export function isTaskComplete(task, completedIds) {
+  if (task.subtasks && task.subtasks.length > 0) {
+    return task.subtasks.every((s) => completedIds.includes(s.id));
+  }
+  return completedIds.includes(task.id);
+}
+
 export function genWeekDays(anchor) {
   const d = new Date(anchor + 'T12:00:00');
   const dow = d.getDay(); // 0=Sun

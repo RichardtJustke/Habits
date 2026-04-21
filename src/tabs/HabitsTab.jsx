@@ -17,6 +17,7 @@ export default function HabitsTab({
   onToggle,
   onAddTask,
   onDeleteTask,
+  onDeleteSubtask,
 }) {
   const [weekOffset, setWeekOffset] = useState(0);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -61,7 +62,7 @@ export default function HabitsTab({
             color: THEME.colors.textSecondary,
           }}
         >
-          <span>🔥 {currentStreak} days</span>
+          <span>🔥 {currentStreak} dias</span>
           <span>*</span>
           <span>🛡️ {Object.keys(dayLog).filter((d) => dayLog[d] >= 1).length}</span>
         </div>
@@ -81,7 +82,14 @@ export default function HabitsTab({
           tasks={group.tasks}
           todayDone={todayDone}
           onToggle={onToggle}
-          onDelete={onDeleteTask}
+          onDelete={(taskId, subtaskId) => {
+            if (subtaskId) {
+              onDeleteSubtask(taskId, subtaskId);
+              return;
+            }
+
+            onDeleteTask(taskId);
+          }}
         />
       ))}
 

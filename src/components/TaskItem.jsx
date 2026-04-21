@@ -1,6 +1,8 @@
 import { THEME } from '../constants.js';
 
-export default function TaskItem({ task, isChecked, onToggle, onDelete }) {
+export default function TaskItem({ task, isChecked, todayDone, onToggle, onToggleSubtask, onDeleteSubtask, onDelete }) {
+  const hasSubtasks = !!(task.subtasks && task.subtasks.length > 0);
+
   return (
     <div
       style={{
@@ -12,10 +14,12 @@ export default function TaskItem({ task, isChecked, onToggle, onDelete }) {
         borderRadius: THEME.radius.md,
         background: isChecked ? '#0a0a0a' : 'transparent',
         transition: 'background 0.2s',
-        cursor: 'pointer',
+        cursor: hasSubtasks ? 'default' : 'pointer', // se tem subtasks, clica nas subtasks
         position: 'relative',
       }}
-      onClick={onToggle}
+      onClick={() => {
+        if (!hasSubtasks) onToggle();
+      }}
     >
       <span
         style={{
@@ -46,6 +50,60 @@ export default function TaskItem({ task, isChecked, onToggle, onDelete }) {
             }}
           >
             {task.note}
+          </div>
+        )}
+
+        {hasSubtasks && (
+          <div style={{ marginTop: THEME.spacing.md, display: 'flex', flexDirection: 'column', gap: THEME.spacing.sm }}>
+            {task.subtasks.map((sub) => {
+              const isSubDone = todayDone.includes(sub.id);
+              return (
+                <div
+                  key={sub.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: THEME.spacing.md,
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                    color: isSubDone ? THEME.colors.textSecondary : THEME.colors.textTertiary,
+                    textDecoration: isSubDone ? 'line-through' : 'none',
+                    fontSize: 13,
+                  }}
+                >
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: THEME.spacing.md, flex: 1 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onToggleSubtask(sub.id);
+                    }}
+                  >
+                    <span style={{ color: isSubDone ? THEME.colors.success : THEME.colors.border }}>
+                      {isSubDone ? '[✓]' : '[ ]'}
+                    </span>
+                    {sub.name}
+                  </div>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDeleteSubtask(sub.id);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: THEME.colors.textMuted,
+                      cursor: 'pointer',
+                      fontSize: THEME.typography.fontSizeSmall,
+                      fontFamily: THEME.typography.fontFamily,
+                      padding: 0,
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

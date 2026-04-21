@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { THEME, ROTATING_MSGS } from './constants.js';
 import { useHabits } from './hooks/useHabits.js';
-import { buildHeatmap, calculateCurrentStreak, getRotatingMessage } from './utils/helpers.js';
+import { calculateCurrentStreak, getRotatingMessage } from './utils/helpers.js';
 import TerminalWindow from './components/TerminalWindow.jsx';
 import TerminalMenu from './components/TerminalMenu.jsx';
 import TerminalOutput from './components/TerminalOutput.jsx';
@@ -32,8 +32,8 @@ export default function App() {
     setTimeout(() => setFlashMsg(''), 1200);
   };
 
-  const handleAddTask = ({ group, name, note }) => {
-    habits.addTask({ group, name, note });
+  const handleAddTask = ({ group, name, note, subtasks }) => {
+    habits.addTask({ group, name, note, subtasks });
     setFlashMsg('✓ task added');
     setTimeout(() => setFlashMsg(''), 1200);
   };
@@ -44,9 +44,21 @@ export default function App() {
     setTimeout(() => setFlashMsg(''), 1200);
   };
 
+  const handleDeleteSubtask = (taskId, subtaskId) => {
+    habits.deleteSubtask(taskId, subtaskId);
+    setFlashMsg('✓ subtask removed');
+    setTimeout(() => setFlashMsg(''), 1200);
+  };
+
   const handleResetAll = () => {
     habits.resetAllData();
     setFlashMsg('✓ data reset');
+    setTimeout(() => setFlashMsg(''), 1200);
+  };
+
+  const handleImportState = (nextState) => {
+    habits.replaceState(nextState);
+    setFlashMsg('✓ backup restored');
     setTimeout(() => setFlashMsg(''), 1200);
   };
 
@@ -56,10 +68,15 @@ export default function App() {
 
     const cmdMap = {
       'habits': () => setActiveTab('habits'),
+      'habitos': () => setActiveTab('habits'),
       'stats': () => setActiveTab('stats'),
+      'estatisticas': () => setActiveTab('stats'),
       'profile': () => setActiveTab('profile'),
+      'perfil': () => setActiveTab('profile'),
       'help': () => console.log('help'),
+      'ajuda': () => console.log('help'),
       'clear': () => setCommand(''),
+      'limpar': () => setCommand(''),
     };
 
     if (cmdMap[cmd]) {
@@ -151,6 +168,7 @@ export default function App() {
               onToggle={handleToggle}
               onAddTask={handleAddTask}
               onDeleteTask={handleDeleteTask}
+              onDeleteSubtask={handleDeleteSubtask}
             />
           )}
 
@@ -164,6 +182,7 @@ export default function App() {
               dayLog={habits.dayLog}
               completions={habits.completions}
               onResetAll={handleResetAll}
+              onImportState={handleImportState}
             />
           )}
         </TerminalWindow>

@@ -4,12 +4,20 @@ import { THEME, GROUPS } from '../constants.js';
 export default function AddTaskForm({ onAdd, onCancel }) {
   const [name, setName] = useState('');
   const [note, setNote] = useState('');
+  const [subtasksStr, setSubtasksStr] = useState('');
   const [group, setGroup] = useState('morning');
 
   const handleSave = () => {
-    onAdd({ group, name, note });
+    const subtasks = subtasksStr
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((sn) => ({ id: 's' + Date.now() + Math.random().toString().slice(2, 6), name: sn }));
+
+    onAdd({ group, name, note, subtasks });
     setName('');
     setNote('');
+    setSubtasksStr('');
     setGroup('morning');
   };
 
@@ -77,6 +85,35 @@ export default function AddTaskForm({ onAdd, onCancel }) {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="nota..."
+          style={{
+            background: THEME.colors.bg,
+            border: `1px solid ${THEME.colors.border}`,
+            color: THEME.colors.text,
+            padding: `${THEME.spacing.md}px ${THEME.spacing.md}px`,
+            borderRadius: THEME.radius.md,
+            fontFamily: THEME.typography.fontFamily,
+            fontSize: 13,
+            width: '100%',
+            outline: 'none',
+            boxSizing: 'border-box',
+          }}
+        />
+      </div>
+
+      <div style={{ marginBottom: THEME.spacing.md }}>
+        <div
+          style={{
+            color: THEME.colors.textTertiary,
+            fontSize: THEME.typography.fontSizeXSmall,
+            marginBottom: THEME.spacing.sm,
+          }}
+        >
+          // subtasks (separadas por vírgula)
+        </div>
+        <input
+          value={subtasksStr}
+          onChange={(e) => setSubtasksStr(e.target.value)}
+          placeholder="água, ler, comer..."
           style={{
             background: THEME.colors.bg,
             border: `1px solid ${THEME.colors.border}`,

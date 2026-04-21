@@ -62,10 +62,12 @@ src/
 ## 🎯 Features
 
 ✅ **Tarefas organizadas por grupos** (Morning, Deep Work, Saúde, Wind Down, Learning)  
+✅ **Subtasks** — cada tarefa pode carregar subitens e você pode removê-los individualmente  
 ✅ **Streaks** — contador de dias consecutivos por tarefa  
 ✅ **Heatmap de contribuições** — último ano de atividade  
 ✅ **Estatísticas** — dias rastreados, média de conclusão, dias perfeitos  
-✅ **Persistência local** — tudo salvo no localStorage  
+✅ **Persistência local** — tudo salvo automaticamente no localStorage  
+✅ **Backup JSON** — exporte e importe seus dados pelo Perfil para não perder nada  
 ✅ **UI terminal-like** — dark mode com paleta Dracula-inspired  
 
 ## 🎨 Customizar Tema
@@ -97,6 +99,13 @@ export const DEFAULT_TASKS = [
 - **Helpers pures** — cálculos de datas, heatmap, streaks
 - **Componentes stateless** — recebem props, disparam callbacks
 - **localStorage** — auto-save via useEffect
+- **Backup manual** — exportação/importação JSON na aba Perfil
+
+## 💾 Como os dados são salvos
+
+O app usa o localStorage do navegador com a chave `habits:state` para salvar automaticamente tarefas, subtasks, completions e estatísticas.
+
+Se quiser uma proteção extra contra perda de dados, use os botões de **exportar backup JSON** e **importar backup JSON** na aba Perfil. Assim você pode guardar uma cópia fora do navegador e restaurar depois, mesmo se limpar os dados locais.
 
 ## 🏃 Build para Produção
 

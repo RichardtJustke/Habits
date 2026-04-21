@@ -52,9 +52,9 @@ export default function StatsTab({ rotatingMsg, tasks, dayLog }) {
             dias perfeitos: <span style={{ color: THEME.colors.primary }}>{stats.perfectDays}</span>
           </div>
           <div>
-            sequência atual:{' '}}
+            sequência atual:{' '}
             <span style={{ color: currentStreak > 0 ? THEME.colors.primary : THEME.colors.textTertiary }}>
-              {currentStreak} days
+              {currentStreak} dias
             </span>
           </div>
         </div>

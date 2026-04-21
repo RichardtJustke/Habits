@@ -1,8 +1,9 @@
 import { THEME } from '../constants.js';
 import TaskItem from './TaskItem.jsx';
+import { isTaskComplete } from '../utils/helpers.js';
 
 export default function TaskGroup({ group, tasks, todayDone, onToggle, onDelete }) {
-  const done = tasks.filter((t) => todayDone.includes(t.id)).length;
+  const done = tasks.filter((t) => isTaskComplete(t, todayDone)).length;
 
   return (
     <div style={{ marginBottom: THEME.spacing.xxxl }}>
@@ -29,8 +30,17 @@ export default function TaskGroup({ group, tasks, todayDone, onToggle, onDelete 
         <TaskItem
           key={task.id}
           task={task}
-          isChecked={todayDone.includes(task.id)}
-          onToggle={() => onToggle(task.id)}
+          isChecked={isTaskComplete(task, todayDone)}
+          todayDone={todayDone}
+          onToggle={() => {
+            // se tiver subtasks a gente n deveria deixar completar a pai com click, 
+            // mas é a vontade do cliente. Se clicar na pai, nao marca subtasks diretamente pq
+            // toggle so lida com ID. 
+            // Para não quebrar algo, permitimos apenas toggle no botao. 
+            onToggle(task.id);
+          }}
+          onToggleSubtask={(subId) => onToggle(subId)}
+          onDeleteSubtask={(subId) => onDelete(task.id, subId)}
           onDelete={() => onDelete(task.id)}
         />
       ))}
